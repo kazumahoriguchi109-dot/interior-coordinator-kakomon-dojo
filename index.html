@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>インテリアコーディネーター過去問道場</title>
+    <meta
+      name="description"
+      content="インテリアコーディネーター試験の問題を一問一答で学べる学習サイト。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Interior Coordinator Study Dojo</p>
+        <div class="hero-copy">
+          <div>
+            <h1>インテリアコーディネーター<br />過去問道場</h1>
+            <p class="hero-lead">
+              PDFベースで抽出した過去問を、一問一答でテンポよく学習するための静的サイトです。
+              巻ごと・章ごとに絞り込み、答え合わせと復習を繰り返せます。
+            </p>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span>収録問題</span>
+              <strong id="hero-question-count">-</strong>
+            </div>
+            <div class="stat-card">
+              <span>学習済み</span>
+              <strong id="hero-studied-count">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>正答率</span>
+              <strong id="hero-accuracy">0%</strong>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="control-panel">
+          <section class="panel-block">
+            <h2>出題設定</h2>
+            <label class="field">
+              <span>巻</span>
+              <select id="volume-filter"></select>
+            </label>
+            <label class="field">
+              <span>章</span>
+              <select id="chapter-filter"></select>
+            </label>
+            <label class="field">
+              <span>表示モード</span>
+              <select id="mode-filter">
+                <option value="all">すべて</option>
+                <option value="bookmarked">ブックマークのみ</option>
+                <option value="incorrect">間違えた問題のみ</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>キーワード検索</span>
+              <input id="search-input" type="search" placeholder="例: マーケティング" />
+            </label>
+            <label class="toggle">
+              <input id="shuffle-toggle" type="checkbox" />
+              <span>シャッフル出題</span>
+            </label>
+            <button id="reset-progress" class="ghost-button" type="button">学習記録をリセット</button>
+          </section>
+
+          <section class="panel-block">
+            <h2>学習状況</h2>
+            <dl class="progress-list">
+              <div>
+                <dt>現在位置</dt>
+                <dd id="position-label">-</dd>
+              </div>
+              <div>
+                <dt>正解数</dt>
+                <dd id="correct-count">0</dd>
+              </div>
+              <div>
+                <dt>不正解数</dt>
+                <dd id="incorrect-count">0</dd>
+              </div>
+              <div>
+                <dt>ブックマーク</dt>
+                <dd id="bookmark-count">0</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="panel-block note">
+            <h2>注意</h2>
+            <p>
+              問題データは提供PDFのOCR抽出結果をもとに整形しています。公開前に内容と権利関係の確認を行ってください。
+            </p>
+          </section>
+        </aside>
+
+        <section class="quiz-stage">
+          <div class="quiz-toolbar">
+            <div class="badge-row">
+              <span id="volume-badge" class="badge">-</span>
+              <span id="chapter-badge" class="badge">-</span>
+              <span id="exam-badge" class="badge accent">-</span>
+            </div>
+            <button id="bookmark-button" class="ghost-button" type="button">☆ 保存</button>
+          </div>
+
+          <article class="question-card">
+            <p id="question-id" class="question-id">-</p>
+            <h2 id="question-text" class="question-text">読み込み中...</h2>
+            <div id="options" class="options" role="list"></div>
+
+            <div class="question-actions">
+              <button id="reveal-button" class="primary-button" type="button">答えを見る</button>
+              <button id="prev-button" class="ghost-button" type="button">前へ</button>
+              <button id="next-button" class="ghost-button" type="button">次へ</button>
+            </div>
+
+            <section id="answer-panel" class="answer-panel hidden">
+              <div class="answer-header">
+                <p class="answer-label">正答</p>
+                <strong id="answer-text">-</strong>
+              </div>
+              <p id="explanation-text" class="answer-copy"></p>
+              <details class="keywords-block">
+                <summary>キーワードと補足</summary>
+                <p id="keywords-text"></p>
+              </details>
+            </section>
+          </article>
+
+          <section class="queue-panel">
+            <div>
+              <p class="queue-label">対象問題</p>
+              <strong id="filtered-count">-</strong>
+            </div>
+            <div>
+              <p class="queue-label">出題元</p>
+              <strong id="source-label">-</strong>
+            </div>
+            <div>
+              <p class="queue-label">データ状態</p>
+              <strong id="dataset-status">読み込み中</strong>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
