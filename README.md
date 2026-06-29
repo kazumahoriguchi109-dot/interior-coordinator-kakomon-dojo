@@ -6,10 +6,16 @@
 
 ```bash
 cd 15_Personal_Projects/interior-coordinator-dojo
-python3 -m http.server 8000
+./start_local.sh
 ```
 
 `http://localhost:8000` を開くと確認できます。
+
+ポートを変える場合:
+
+```bash
+./start_local.sh 8123
+```
 
 ## データ再生成
 
