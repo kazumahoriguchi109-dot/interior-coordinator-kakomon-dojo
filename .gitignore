@@ -1,2 +1,3 @@
 data/raw/
 data/sample-questions.json
+scripts/__pycache__/
