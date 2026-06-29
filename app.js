@@ -22,13 +22,6 @@ const elements = {
   searchInput: document.querySelector("#search-input"),
   shuffleToggle: document.querySelector("#shuffle-toggle"),
   resetProgress: document.querySelector("#reset-progress"),
-  heroQuestionCount: document.querySelector("#hero-question-count"),
-  heroStudiedCount: document.querySelector("#hero-studied-count"),
-  heroAccuracy: document.querySelector("#hero-accuracy"),
-  positionLabel: document.querySelector("#position-label"),
-  correctCount: document.querySelector("#correct-count"),
-  incorrectCount: document.querySelector("#incorrect-count"),
-  bookmarkCount: document.querySelector("#bookmark-count"),
   volumeBadge: document.querySelector("#volume-badge"),
   chapterBadge: document.querySelector("#chapter-badge"),
   examBadge: document.querySelector("#exam-badge"),
@@ -41,11 +34,6 @@ const elements = {
   nextButton: document.querySelector("#next-button"),
   answerPanel: document.querySelector("#answer-panel"),
   answerText: document.querySelector("#answer-text"),
-  explanationText: document.querySelector("#explanation-text"),
-  keywordsText: document.querySelector("#keywords-text"),
-  filteredCount: document.querySelector("#filtered-count"),
-  sourceLabel: document.querySelector("#source-label"),
-  datasetStatus: document.querySelector("#dataset-status"),
 };
 
 function loadProgress() {
@@ -273,15 +261,12 @@ function renderCurrentQuestion() {
   elements.questionId.textContent =
     question.set_number != null ? `問題 ${question.set_number}-${question.blank_label}` : question.id;
   elements.questionText.textContent = question.prompt;
-  elements.sourceLabel.textContent = `${question.source_pdf} / p.${question.source_page}`;
 
   elements.options.innerHTML = "";
   question.options.forEach((option, index) => createOption(elements.options, index, option));
   renderOptionStates(question);
 
-  elements.answerText.textContent = question.answer_text ?? "OCR確認待ち";
-  elements.explanationText.textContent = question.explanation || "解説はまだ整形されていません。";
-  elements.keywordsText.textContent = question.keywords || "補足情報はありません。";
+  elements.answerText.textContent = question.answer_text ?? "答えを確認中";
   elements.answerPanel.classList.toggle("hidden", !state.revealed);
 
   const isBookmarked = state.progress.bookmarks.includes(question.id);
@@ -296,25 +281,10 @@ function renderEmptyState() {
   elements.questionText.textContent = "絞り込み条件を変更してください。";
   elements.options.innerHTML = "";
   elements.answerPanel.classList.add("hidden");
-  elements.sourceLabel.textContent = "-";
 }
 
 function updateMetrics() {
-  const studied = state.progress.seenIds.length;
-  const correct = state.progress.correctIds.length;
-  const incorrect = state.progress.incorrectIds.length;
-  const accuracy = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 0;
-
-  elements.heroQuestionCount.textContent = String(state.questions.length);
-  elements.heroStudiedCount.textContent = String(studied);
-  elements.heroAccuracy.textContent = `${accuracy}%`;
-  elements.correctCount.textContent = String(correct);
-  elements.incorrectCount.textContent = String(incorrect);
-  elements.bookmarkCount.textContent = String(state.progress.bookmarks.length);
-  elements.filteredCount.textContent = String(state.filtered.length);
-  elements.positionLabel.textContent = state.filtered.length
-    ? `${state.currentIndex + 1} / ${state.filtered.length}`
-    : "-";
+  return;
 }
 
 function attachEvents() {
@@ -348,7 +318,6 @@ async function loadQuestions() {
   }
   const payload = await response.json();
   state.questions = payload.questions ?? [];
-  elements.datasetStatus.textContent = `${state.questions.length}問を読み込み`;
 }
 
 async function start() {
@@ -362,7 +331,6 @@ async function start() {
     applyFilters();
   } catch (error) {
     console.error(error);
-    elements.datasetStatus.textContent = "データ読み込み失敗";
     renderEmptyState();
   }
 }

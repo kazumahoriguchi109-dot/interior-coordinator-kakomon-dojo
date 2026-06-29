@@ -18,23 +18,9 @@
           <div>
             <h1>インテリアコーディネーター<br />過去問道場</h1>
             <p class="hero-lead">
-              PDFベースで抽出した過去問を、一問一答でテンポよく学習するための静的サイトです。
-              巻ごと・章ごとに絞り込み、答え合わせと復習を繰り返せます。
+              インテリアコーディネーター試験の過去問を、一問一答で学べる学習サイトです。
+              巻ごと・章ごとに絞り込みながら、問題と答えをテンポよく確認できます。
             </p>
-          </div>
-          <div class="hero-stats">
-            <div class="stat-card">
-              <span>収録問題</span>
-              <strong id="hero-question-count">-</strong>
-            </div>
-            <div class="stat-card">
-              <span>学習済み</span>
-              <strong id="hero-studied-count">0</strong>
-            </div>
-            <div class="stat-card">
-              <span>正答率</span>
-              <strong id="hero-accuracy">0%</strong>
-            </div>
           </div>
         </div>
       </header>
@@ -70,34 +56,6 @@
             <button id="reset-progress" class="ghost-button" type="button">学習記録をリセット</button>
           </section>
 
-          <section class="panel-block">
-            <h2>学習状況</h2>
-            <dl class="progress-list">
-              <div>
-                <dt>現在位置</dt>
-                <dd id="position-label">-</dd>
-              </div>
-              <div>
-                <dt>正解数</dt>
-                <dd id="correct-count">0</dd>
-              </div>
-              <div>
-                <dt>不正解数</dt>
-                <dd id="incorrect-count">0</dd>
-              </div>
-              <div>
-                <dt>ブックマーク</dt>
-                <dd id="bookmark-count">0</dd>
-              </div>
-            </dl>
-          </section>
-
-          <section class="panel-block note">
-            <h2>注意</h2>
-            <p>
-              問題データは提供PDFのOCR抽出結果をもとに整形しています。公開前に内容と権利関係の確認を行ってください。
-            </p>
-          </section>
         </aside>
 
         <section class="quiz-stage">
@@ -126,28 +84,8 @@
                 <p class="answer-label">正答</p>
                 <strong id="answer-text">-</strong>
               </div>
-              <p id="explanation-text" class="answer-copy"></p>
-              <details class="keywords-block">
-                <summary>キーワードと補足</summary>
-                <p id="keywords-text"></p>
-              </details>
             </section>
           </article>
-
-          <section class="queue-panel">
-            <div>
-              <p class="queue-label">対象問題</p>
-              <strong id="filtered-count">-</strong>
-            </div>
-            <div>
-              <p class="queue-label">出題元</p>
-              <strong id="source-label">-</strong>
-            </div>
-            <div>
-              <p class="queue-label">データ状態</p>
-              <strong id="dataset-status">読み込み中</strong>
-            </div>
-          </section>
         </section>
       </main>
     </div>
